@@ -1,8 +1,12 @@
+{% extends 'StintChoreBundle::layout.html.twig' %}
+
 {% form_theme form 'form_table_layout.html.twig' %}
 
-<form action="{{ path('chore_new') }}" method="POST" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
+{% block content %}
+  <form action="{{ path('chore_new') }}" method="POST" {{ form_enctype(form) }}>
+      {{ form_widget(form) }}
 
-    <input type="submit" />
-</form>
-<a href="{{ path('chore_list') }}">Chores</a>
+      <input type="submit" />
+  </form>
+  <a href="{{ path('chore_list') }}">Chores</a>
+{% endblock %}

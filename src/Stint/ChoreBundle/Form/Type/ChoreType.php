@@ -18,29 +18,31 @@ class ChoreType extends AbstractType
     ));
 
     $builder->add('frequency', 'choice', array(
-      'choices' => range(1,30),
+      'choices' => array_combine(range(1,30), range(1,30)),
       'label' => 'Repeat every'
     ));
 
 
     $builder->add('start_date', 'date', array(
-      'label' => 'Starts on'
+      'label' => 'Starts on',
+      'widget' => 'single_text',
+      'format' => 'dd/MM/yyyy'
     ));
 
 
     $builder->add('end_count', 'text', array(
       'label' => 'End after',
       'max_length' => 2,
+      'required' => false,
       'attr' => array('size' => '2')
     ));
 
     $builder->add('end_date', 'date', array(
-      'label' => 'End on'
+      'label' => 'End on',
+      'widget' => 'single_text',
+      'format' => 'dd/MM/yyyy',
+      'required' => false
     ));
-
-
-
-    // add ENDS radio and fields
   }
 
   public function getName()

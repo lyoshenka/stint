@@ -1,0 +1,5 @@
+{% for flash in ['success', 'notice', 'error'] %}
+  {% if app.session.hasFlash(flash) %}
+    <div class="flash {{ flash }}">{{ app.session.flash(flash) }}</div>
+  {% endif %}
+{% endfor %}

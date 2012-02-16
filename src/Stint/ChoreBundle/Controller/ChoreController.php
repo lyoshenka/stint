@@ -27,7 +27,9 @@ class ChoreController extends Controller
         $em->persist($chore); // can get chore from form with $form->getData()
         $em->flush();
 
-        return $this->redirect($this->generateUrl('chore_new'));
+        $this->get('session')->setFlash('success', 'Chore created.');
+
+        return $this->redirect($this->generateUrl('chore_list'));
       }
     }
 
@@ -42,5 +44,23 @@ class ChoreController extends Controller
     return $this->render('StintChoreBundle:Chore:list.html.twig', array(
       'chores' => $chores,
     ));
+  }
+
+  public function deleteAction($id)
+  {
+    $chore = $this->getDoctrine()->getRepository('StintChoreBundle:Chore')->find($id);
+    if (!$chore)
+    {
+      $this->get('session')->setFlash('error', 'Chore with id ' . $id . ' not found.');
+      return $this->redirect($this->generateUrl('chore_list'));
+    }
+
+    $em = $this->getDoctrine()->getEntityManager();
+    $em->remove($chore);
+    $em->flush();
+
+    $this->get('session')->setFlash('success', 'Chore "' . $chore->getDescription() . '"deleted.');
+
+    return $this->redirect($this->generateUrl('chore_list'));
   }
 }

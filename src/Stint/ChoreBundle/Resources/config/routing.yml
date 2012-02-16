@@ -1,7 +1,13 @@
+chore_list:
+    pattern:  /chore/list
+    defaults: { _controller: StintChoreBundle:Chore:list }
+
 chore_new:
     pattern:  /chore/new
     defaults: { _controller: StintChoreBundle:Chore:new }
 
-chore_list:
-    pattern:  /chore/list
-    defaults: { _controller: StintChoreBundle:Chore:list }
+chore_delete:
+    pattern:  /chore/delete/{id}
+    defaults: { _controller: StintChoreBundle:Chore:delete }
+    requirements:
+      id: \d+

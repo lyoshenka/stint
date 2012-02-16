@@ -31,7 +31,7 @@ class Chore
    * @var string
    * @ORM\Column(type="text", length=255)
    * @Assert\NotBlank()
-   * @Assert\MaxLength(10)
+   * @Assert\MaxLength(255)
    */
   protected $description;
 
@@ -58,25 +58,25 @@ class Chore
 
   /**
    * @var integer
-   * @ORM\Column(type="integer")
+   * @ORM\Column(type="integer", nullable=true)
    */
   protected $end_count;
 
   /**
    * @var datetime
-   * @ORM\Column(type="datetime")
+   * @ORM\Column(type="datetime", nullable=true)
    */
   protected $end_date;
 
   /**
    * @var integer
-   * @ORM\Column(type="integer")
+   * @ORM\Column(type="integer", nullable=true)
    */
   protected $weekdays;
 
   /**
    * @var string
-   * @ORM\Column(type="text", length=20)
+   * @ORM\Column(type="text", length=20, nullable=true)
    */
   protected $monthly_mode;
 
