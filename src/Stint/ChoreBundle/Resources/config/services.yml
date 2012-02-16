@@ -1,0 +1,7 @@
+parameters:
+#    stint_chore.example.class: Stint\ChoreBundle\Example
+
+services:
+#    stint_chore.example:
+#        class: %stint_chore.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

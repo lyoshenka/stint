@@ -1,0 +1,7 @@
+<h1>Chores List</h1>
+<ul>
+  {% for chore in chores %}
+    <li>{{ chore.description|e }}</li>
+  {% endfor %}
+</ul>
+<a href="{{ path('chore_new') }}">New Chore</a>

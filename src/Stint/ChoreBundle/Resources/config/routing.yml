@@ -1,0 +1,7 @@
+chore_new:
+    pattern:  /chore/new
+    defaults: { _controller: StintChoreBundle:Chore:new }
+
+chore_list:
+    pattern:  /chore/list
+    defaults: { _controller: StintChoreBundle:Chore:list }
