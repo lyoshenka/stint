@@ -1,2 +1,17 @@
-## YAML Template.
----
+Stint\ChoreBundle\Entity\Chore:
+  properties:
+    description:
+      - NotBlank: ~
+      - MaxLength: 255
+    period:
+      - NotBlank: ~
+    frequency:
+      - NotBlank: ~
+    start_date:
+      - NotBlank: ~
+
+Stint\ChoreBundle\Entity\ChoreList:
+  properties:
+    name:
+      - NotBlank: ~
+      - MaxLength: 255

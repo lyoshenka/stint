@@ -1,0 +1,15 @@
+{% extends 'StintChoreBundle::layout.html.twig' %}
+
+{% block content %}
+  <h1>{{ chore.description }}</h1>
+  <h2>Assigned to</h2>
+  <ul>
+    {% for user in chore.getUsers %}
+      <li>{{ user.name }}</li>
+    {% else %}
+      <li>No one</li>
+    {% endfor %}
+  </ul>
+
+  <a href="{{ path('chorelist_show', { 'id': chore.getChoreList.id }) }}">Back to list</a>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'StintChoreBundle::layout.html.twig' %}
+
+{% block content %}
+  <h1>Lists</h1>
+  <ul>
+    {% for choreList in choreLists %}
+      <li><a href="{{ path('chorelist_show', { 'id': choreList.id }) }}">{{ choreList.id }} - {{ choreList.name }}</a></li>
+    {% else %}
+      <li>No lists</li>
+    {% endfor %}
+  </ul>
+  <form action="{{ path('chorelist_create') }}" method="POST" {{ form_enctype(form) }}>
+    {{ form_errors(form) }}
+
+    {{ form_errors(form.name) }}
+    {{ form_label(form.name) }}
+    {{ form_widget(form.name) }}
+
+    {{ form_rest(form) }}
+
+    <input type="submit" value="New list" />
+  </form>
+{% endblock %}

@@ -1,13 +1,35 @@
-chore_list:
-    pattern:  /chore/list
-    defaults: { _controller: StintChoreBundle:Chore:list }
+chorelist_list:
+  pattern:  /
+  defaults: { _controller: StintChoreBundle:ChoreList:list }
+
+chorelist_show:
+  pattern:  /list/{id}
+  defaults: { _controller: StintChoreBundle:ChoreList:show }
+  requirements:
+    id: \d+
+
+chorelist_create:
+  pattern:  /list/create
+  defaults: { _controller: StintChoreBundle:ChoreList:create }
+  requirements:
+    _method: POST
+
+
 
 chore_new:
-    pattern:  /chore/new
-    defaults: { _controller: StintChoreBundle:Chore:new }
+  pattern:  /{listId}/new
+  defaults: { _controller: StintChoreBundle:Chore:new }
+  requirements:
+    listId: \d+
+
+chore_show:
+  pattern:  /chore/{id}
+  defaults: { _controller: StintChoreBundle:Chore:show }
+  requirements:
+    id: \d+
 
 chore_delete:
-    pattern:  /chore/delete/{id}
-    defaults: { _controller: StintChoreBundle:Chore:delete }
-    requirements:
-      id: \d+
+  pattern:  /chore/delete/{id}
+  defaults: { _controller: StintChoreBundle:Chore:delete }
+  requirements:
+    id: \d+

@@ -1,84 +1,40 @@
 <?php
+
 namespace Stint\ChoreBundle\Entity;
-use Doctrine\ORM\Mapping as ORM;
+
+//use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity
- * @ORM\Table
- */
 class Chore
 {
   // periods
-  const DAILY = 'daily',
+  const
+  DAILY = 'daily',
   WEEKLY = 'weekly',
   MONTHLY = 'monthly',
   YEARLY = 'yearly',
-    
+
   // monthly modes
   DAY_OF_WEEK = 'day_of_week',
   DAY_OF_MONTH = 'day_of_month';
 
-  /**
-   * @var integer
-   * @ORM\Id
-   * @ORM\Column(type="integer")
-   * @ORM\GeneratedValue(strategy="AUTO")
-   */
+  
   protected $id;
 
-  /**
-   * @var string
-   * @ORM\Column(type="text", length=255)
-   * @Assert\NotBlank()
-   * @Assert\MaxLength(255)
-   */
   protected $description;
-
-  /**
-   * @var string
-   * @ORM\Column(type="text", length=20)
-   * @Assert\NotBlank()
-   */
   protected $period;
-
-  /**
-   * @var integer
-   * @ORM\Column(type="integer")
-   * @Assert\NotBlank()
-   */
   protected $frequency;
-
-  /**
-   * @var datetime
-   * @ORM\Column(type="datetime")
-   * @Assert\NotBlank()
-   */
   protected $start_date;
-
-  /**
-   * @var integer
-   * @ORM\Column(type="integer", nullable=true)
-   */
   protected $end_count;
-
-  /**
-   * @var datetime
-   * @ORM\Column(type="datetime", nullable=true)
-   */
   protected $end_date;
-
-  /**
-   * @var integer
-   * @ORM\Column(type="integer", nullable=true)
-   */
   protected $weekdays;
-
-  /**
-   * @var string
-   * @ORM\Column(type="text", length=20, nullable=true)
-   */
   protected $monthly_mode;
+
+  protected $creator;
+
+  protected $users;
+  protected $chore_list;
+
 
   /**
    * Get id
@@ -183,7 +139,7 @@ class Chore
   /**
    * Get weekdays
    *
-   * @return integer 
+   * @return integer
    */
   public function getWeekdays()
   {
@@ -203,7 +159,7 @@ class Chore
   /**
    * Get monthly_mode
    *
-   * @return text 
+   * @return text
    */
   public function getMonthlyMode()
   {
@@ -253,7 +209,7 @@ class Chore
     /**
      * Get end_count
      *
-     * @return integer 
+     * @return integer
      */
     public function getEndCount()
     {
@@ -273,10 +229,74 @@ class Chore
     /**
      * Get end_date
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getEndDate()
     {
         return $this->end_date;
+    }
+    public function __construct()
+    {
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add users
+     *
+     * @param Stint\ChoreBundle\Entity\User $users
+     */
+    public function addUser(\Stint\ChoreBundle\Entity\User $users)
+    {
+        $this->users[] = $users;
+    }
+
+    /**
+     * Get users
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
+
+    /**
+     * Set chore_list
+     *
+     * @param Stint\ChoreBundle\Entity\ChoreList $choreList
+     */
+    public function setChoreList(\Stint\ChoreBundle\Entity\ChoreList $choreList)
+    {
+        $this->chore_list = $choreList;
+    }
+
+    /**
+     * Get chore_list
+     *
+     * @return Stint\ChoreBundle\Entity\ChoreList
+     */
+    public function getChoreList()
+    {
+        return $this->chore_list;
+    }
+
+    /**
+     * Set creator
+     *
+     * @param Stint\ChoreBundle\Entity\User $creator
+     */
+    public function setCreator(\Stint\ChoreBundle\Entity\User $creator)
+    {
+        $this->creator = $creator;
+    }
+
+    /**
+     * Get creator
+     *
+     * @return Stint\ChoreBundle\Entity\User
+     */
+    public function getCreator()
+    {
+        return $this->creator;
     }
 }

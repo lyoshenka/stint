@@ -3,17 +3,38 @@ namespace Stint\ChoreBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 use Stint\ChoreBundle\Entity\Chore;
 use Stint\ChoreBundle\Form\Type\ChoreType;
+use Stint\ChoreBundle\Entity\ChoreList;
 
 class ChoreController extends Controller
 {
+  public function showAction($id)
+  {
+    $chore = $this->getDoctrine()->getRepository('StintChoreBundle:Chore')->find($id);
+    if (!$chore)
+    {
+      throw $this->createNotFoundException('Chore ' . $id . ' not found.');
+    }
 
+    return $this->render('StintChoreBundle:Chore:show.html.twig', array(
+      'chore' => $chore,
+    ));
+  }
+  
   public function newAction(Request $request)
   {
+    $choreList = $choreLists = $this->getDoctrine()->getRepository('StintChoreBundle:ChoreList')->find($request->get('listId'));
+    if (!$choreList)
+    {
+      throw $this->createNotFoundException('Chore list ' . $request->get('listId') . ' not found.');
+    }
+
     $chore = new Chore();
     $chore->setDescription('A description');
+    $chore->setChoreList($choreList);
 
     $form = $this->createForm(new ChoreType(), $chore);
 
@@ -29,20 +50,13 @@ class ChoreController extends Controller
 
         $this->get('session')->setFlash('success', 'Chore created.');
 
-        return $this->redirect($this->generateUrl('chore_list'));
+        return $this->redirect($this->generateUrl('chorelist_show', array('id' => $choreList->getId())));
       }
     }
 
     return $this->render('StintChoreBundle:Chore:new.html.twig', array(
       'form' => $form->createView(),
-    ));
-  }
-
-  public function listAction(Request $request)
-  {
-    $chores = $this->getDoctrine()->getRepository('StintChoreBundle:Chore')->findAll();
-    return $this->render('StintChoreBundle:Chore:list.html.twig', array(
-      'chores' => $chores,
+      'chore' => $chore
     ));
   }
 

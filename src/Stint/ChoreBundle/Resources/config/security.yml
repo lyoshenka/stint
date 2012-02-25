@@ -1,0 +1,6 @@
+#security:
+#  providers:
+#    main:
+#      entity: { class: Stint\ChoreBundle\Entity\User, property: username }
+#  encoders:
+#    Acme\UserBundle\Entity\User: sha512

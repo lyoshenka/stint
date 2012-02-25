@@ -1,0 +1,119 @@
+Stint\ChoreBundle\Entity\Chore:
+  type: entity
+  table: chore
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    description:
+      type: string
+      length: 255
+    period:
+      type: string
+      length: 20
+    frequency:
+      type: integer
+    start_date:
+      type: datetime
+    end_count:
+      type: integer
+      nullable: true
+    end_date:
+      type: datetime
+      nullable: true
+    weekdays:
+      type: integer
+      nullable: true
+    monthly_mode:
+      type: string
+      length: 20
+      nullable: true
+  manyToOne:
+    creator:
+      targetEntity: User
+      inversedBy: created_chores
+      joinColumn:
+        name: creator_id
+        referencedColumnName: id
+        nulllable: false
+    chore_list:
+      targetEntity: ChoreList
+      inversedBy: chores
+      joinColumn:
+        name: chore_list_id
+        referencedColumnName: id
+        nulllable: false
+  manyToMany:
+    users:
+      targetEntity: User
+      inversedBy: chores
+
+
+Stint\ChoreBundle\Entity\User:
+  type: entity
+  table: user
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    email:
+      type: string
+      length: 255
+      unique: true
+    name:
+      type: string
+      length: 50
+  manyToMany:
+    chores:
+      targetEntity: Chore
+      mappedBy: users
+    chore_list:
+      targetEntity: ChoreList
+      mappedBy: users
+  oneToMany:
+    created_chores:
+      targetEntity: Chore
+      mappedBy: creator
+    owned_lists:
+      targetEntity: ChoreList
+      mappedBy: owner
+    created_lists:
+      targetEntity: ChoreList
+      mappedBy: creator
+
+
+Stint\ChoreBundle\Entity\ChoreList:
+  type: entity
+  table: chore_list
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    name:
+      type: string
+  oneToMany:
+    chores:
+      targetEntity: Chore
+      mappedBy: chore_list
+  manyToOne:
+    creator:
+      targetEntity: User
+      inversedBy: created_lists
+      joinColumn:
+        name: creator_id
+        referencedColumnName: id
+        nulllable: false
+    owner:
+      targetEntity: User
+      inversedBy: owned_lists
+      joinColumn:
+        name: owner_id
+        referencedColumnName: id
+        nulllable: false
+  manyToMany:
+    users:
+      targetEntity: User
+      inversedBy: chore_list
