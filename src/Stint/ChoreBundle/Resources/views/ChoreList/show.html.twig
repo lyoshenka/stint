@@ -8,11 +8,16 @@
   <h1>{{ choreList.name }}</h1>
   <ul>
     {% for chore in choreList.chores %}
-      <li>{% include 'StintChoreBundle:Chore:description.html.twig' %}</li>
+      <li>
+        {% include 'StintChoreBundle:Chore:description.html.twig' %}
+        <a href="{{ path('chore_delete', { id: chore.id }) }}">Delete</a>
+      </li>
     {% else %}
       <li>No chores</li>
     {% endfor %}
   </ul>
-  <a href="{{ path('chore_new', { 'listId': choreList.id }) }}">Add chore</a><br/>
-  <a href="{{ path('home') }}">Home</a>
+{% endblock %}
+
+{% block bottomNav %}
+    <a href="{{ path('chore_new', { 'listId': choreList.id }) }}">Add chore</a><br/>
 {% endblock %}

@@ -11,5 +11,8 @@
     {{ form_widget(form) }}
     <input type="submit" />
   </form>
-  <a href="{{ path('chorelist_show', { 'id': chore.getChoreList.id }) }}">Back to list</a>
+{% endblock %}
+
+{% block bottomNav %}
+    <a href="{{ path('chorelist_show', { 'id': chore.getChoreList.id }) }}">Back to list</a>
 {% endblock %}

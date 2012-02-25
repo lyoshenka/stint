@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Stint\ChoreBundle\Entity\Chore;
 use Stint\ChoreBundle\Form\Type\ChoreType;
 use Stint\ChoreBundle\Entity\ChoreList;
+use Stint\ChoreBundle\Entity\User;
 
 class ChoreController extends Controller
 {
@@ -19,8 +20,14 @@ class ChoreController extends Controller
       throw $this->createNotFoundException('Chore ' . $id . ' not found.');
     }
 
+//    $userRepo = $this->get('stint.repo.user');
+//    $unassignedUsers = $userRepo->findUnassignedToChore($chore);
+    $em = $em = $this->getDoctrine()->getEntityManager();
+    $unassignedUsers = $em->getRepository('StintChoreBundle:User')->findUnassignedToChore($chore);
+
     return $this->render('StintChoreBundle:Chore:show.html.twig', array(
       'chore' => $chore,
+      'unassignedUsers' => $unassignedUsers
     ));
   }
   
@@ -75,6 +82,41 @@ class ChoreController extends Controller
 
     $this->get('session')->setFlash('success', 'Chore "' . $chore->getDescription() . '"deleted.');
 
-    return $this->redirect($this->generateUrl('chore_list'));
+    return $this->redirect($this->generateUrl('chorelist_show', array('id' => $chore->getChoreList()->getId())));
+  }
+
+  public function assignAction($choreId, $userId)
+  {
+    $chore = $this->getDoctrine()->getRepository('StintChoreBundle:Chore')->find($choreId);
+    $user = $this->getDoctrine()->getRepository('StintChoreBundle:User')->find($userId);
+    if (!$chore || !$user)
+    {
+      $this->get('session')->setFlash('error', 'Could not find chore or user');
+      return $this->redirect($this->generateUrl('chore_list'));
+    }
+
+//    $user->addChore($chore); // why does this not work, but the opposite does?
+    $chore->addUser($user);
+    $this->getDoctrine()->getEntityManager()->flush();
+    $this->get('session')->setFlash('success', 'Assigned chore to ' . $user->getName());
+    return $this->redirect($this->generateUrl('chore_show', array('id' => $chore->getId())));
+  }
+
+  public function unassignAction($choreId, $userId)
+  {
+    $chore = $this->getDoctrine()->getRepository('StintChoreBundle:Chore')->find($choreId);
+    $user = $this->getDoctrine()->getRepository('StintChoreBundle:User')->find($userId);
+    if (!$chore || !$user)
+    {
+      $this->get('session')->setFlash('error', 'Could not find chore or user');
+      return $this->redirect($this->generateUrl('chore_list'));
+    }
+
+//    $user->addChore($chore); // why does this not work, but the opposite does?
+    $chore->getUsers()->removeElement($user);
+    $this->getDoctrine()->getEntityManager()->flush();
+    $this->get('session')->setFlash('success', $user->getName() . ' removed from chore.');
+    return $this->redirect($this->generateUrl('chore_show', array('id' => $chore->getId())));
+
   }
 }

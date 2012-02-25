@@ -53,6 +53,7 @@ Stint\ChoreBundle\Entity\Chore:
 Stint\ChoreBundle\Entity\User:
   type: entity
   table: user
+  repositoryClass: Stint\ChoreBundle\Repository\UserRepository
   id:
     id:
       type: integer

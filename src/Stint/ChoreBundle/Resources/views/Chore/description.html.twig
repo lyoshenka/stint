@@ -1,3 +1,2 @@
-<strong><a href="{{ path('chore_show', { 'id': choreList.id }) }}">{{ chore.description|e }}</a></strong> - 
-Repeats {{ chore.period }}, every {{ chore.frequency }} things, starting {{ chore.startDate|date("m/d/y") }}.
-<a href="{{ path('chore_delete', { id: chore.id }) }}">Delete</a>
+<strong><a href="{{ path('chore_show', { 'id': chore.id }) }}">{{ chore.description|e }}</a></strong> - 
+{% include 'StintChoreBundle:Chore:short_description.html.twig' %}

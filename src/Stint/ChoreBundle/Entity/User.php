@@ -96,25 +96,6 @@ class User //implements UserInterface
         return $this->chores;
     }
 
-    /**
-     * Add friends
-     *
-     * @param Stint\ChoreBundle\Entity\User $friends
-     */
-    public function addUser(\Stint\ChoreBundle\Entity\User $friends)
-    {
-        $this->friends[] = $friends;
-    }
-
-    /**
-     * Get friends
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getFriends()
-    {
-        return $this->friends;
-    }
 
     /**
      * Set chore_list

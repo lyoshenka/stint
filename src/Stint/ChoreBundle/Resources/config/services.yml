@@ -5,3 +5,8 @@ services:
 #    stint_chore.example:
 #        class: %stint_chore.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]
+  
+#  stint.repo.user:
+#    factory_service: doctrine.orm.default_entity_manager
+#    factory_method: getRepository
+#    class:  Stint\ChoreBundle\Repository\BetterRepository

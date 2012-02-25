@@ -46,3 +46,17 @@ chore_delete:
   defaults: { _controller: StintChoreBundle:Chore:delete }
   requirements:
     id: \d+
+
+chore_assign:
+  pattern:  /chore/assign/{choreId}/{userId}
+  defaults: { _controller: StintChoreBundle:Chore:assign }
+  requirements:
+    choreId: \d+
+    userId: \d+
+
+chore_unassign:
+  pattern:  /chore/unassign/{choreId}/{userId}
+  defaults: { _controller: StintChoreBundle:Chore:unassign }
+  requirements:
+    choreId: \d+
+    userId: \d+

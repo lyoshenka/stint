@@ -33,7 +33,7 @@ class DefaultController extends Controller
   public function breadcrumbsAction($object = null)
   {
     $path = array();
-    $path['home'] = $this->generateUrl('home');
+    $path['Home'] = $this->generateUrl('home');
 
     if ($object !== null)
     {
