@@ -1,6 +1,7 @@
-chorelist_list:
+home:
   pattern:  /
-  defaults: { _controller: StintChoreBundle:ChoreList:list }
+  defaults: { _controller: StintChoreBundle:Default:home }
+
 
 chorelist_show:
   pattern:  /list/{id}
@@ -14,6 +15,18 @@ chorelist_create:
   requirements:
     _method: POST
 
+
+user_show:
+  pattern:  /user/{id}
+  defaults: { _controller: StintChoreBundle:User:show }
+  requirements:
+    id: \d+
+
+user_create:
+  pattern:  /user/create
+  defaults: { _controller: StintChoreBundle:User:create }
+  requirements:
+    _method: POST
 
 
 chore_new:

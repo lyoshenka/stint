@@ -1,5 +1,9 @@
 {% extends 'StintChoreBundle::layout.html.twig' %}
 
+{% block breadcrumbs %}
+  {% render "StintChoreBundle:Default:breadcrumbs" with {'object': chore} %}
+{% endblock %}
+
 {% block content %}
   <h1>{{ chore.description }}</h1>
   <h2>Assigned to</h2>

@@ -69,7 +69,7 @@ Stint\ChoreBundle\Entity\User:
     chores:
       targetEntity: Chore
       mappedBy: users
-    chore_list:
+    chore_lists:
       targetEntity: ChoreList
       mappedBy: users
   oneToMany:
@@ -116,4 +116,4 @@ Stint\ChoreBundle\Entity\ChoreList:
   manyToMany:
     users:
       targetEntity: User
-      inversedBy: chore_list
+      inversedBy: chore_lists

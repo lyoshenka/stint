@@ -15,3 +15,13 @@ Stint\ChoreBundle\Entity\ChoreList:
     name:
       - NotBlank: ~
       - MaxLength: 255
+
+Stint\ChoreBundle\Entity\User:
+  properties:
+    name:
+      - NotBlank: ~
+      - MaxLength: 255
+    email:
+      - MaxLength: 255
+      - Email:
+          message: Invalid email address.

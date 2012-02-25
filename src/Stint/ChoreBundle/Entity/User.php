@@ -16,7 +16,7 @@ class User //implements UserInterface
   protected $name;
   
   protected $chores;
-  protected $chore_list;
+  protected $chore_lists;
 
   protected $owned_lists;
   protected $created_lists;
@@ -174,5 +174,15 @@ class User //implements UserInterface
     public function getCreatedLists()
     {
         return $this->created_lists;
+    }
+
+    /**
+     * Get chore_lists
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getChoreLists()
+    {
+        return $this->chore_lists;
     }
 }

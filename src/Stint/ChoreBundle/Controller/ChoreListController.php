@@ -10,16 +10,6 @@ use Stint\ChoreBundle\Form\Type\ChoreListType;
 class ChoreListController extends Controller
 {
 
-  public function listAction()
-  {
-    $form = $this->createForm(new ChoreListType());
-    $choreLists = $this->getDoctrine()->getRepository('StintChoreBundle:ChoreList')->findAll();
-    return $this->render('StintChoreBundle:ChoreList:list.html.twig', array(
-      'choreLists' => $choreLists,
-      'form' => $form->createView()
-    ));
-  }
-
   public function showAction($id)
   {
     $choreList = $this->getDoctrine()->getRepository('StintChoreBundle:ChoreList')->find($id);
@@ -41,14 +31,12 @@ class ChoreListController extends Controller
       $em->flush();
 
       $this->get('session')->setFlash('success', 'Chore list created.');
-
-      return $this->redirect($this->generateUrl('chorelist_list'));
     }
     else
     {
-      $this->get('session')->setFlash('Error', 'Creating list failed.');
+      $this->get('session')->setFlash('error', 'Creating list failed.');
     }
 
-    return $this->redirect($this->generateUrl('chorelist_list'));
+    return $this->redirect($this->generateUrl('home'));
   }
 }

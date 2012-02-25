@@ -1,0 +1,51 @@
+{% extends 'StintChoreBundle::layout.html.twig' %}
+
+{% block breadcrumbs %}
+  {% render "StintChoreBundle:Default:breadcrumbs" %}
+{% endblock %}
+
+{% block content %}
+  <h1>Lists</h1>
+  <ul>
+    {% for choreList in choreLists %}
+      <li><a href="{{ path('chorelist_show', { 'id': choreList.id }) }}">{{ choreList.id }} - {{ choreList.name }}</a></li>
+    {% else %}
+      <li>No lists</li>
+    {% endfor %}
+  </ul>
+  <form action="{{ path('chorelist_create') }}" method="POST" {{ form_enctype(listForm) }}>
+    {{ form_errors(listForm) }}
+
+    {{ form_errors(listForm.name) }}
+    {{ form_label(listForm.name) }}
+    {{ form_widget(listForm.name) }}
+
+    {{ form_rest(listForm) }}
+
+    <input type="submit" value="New list" />
+  </form>
+
+  <h1>Users</h1>
+  <ul>
+    {% for user in users %}
+      <li><a href="{{ path('user_show', { 'id': user.id }) }}">{{ user.id }} - {{ user.name }}</a></li>
+    {% else %}
+      <li>No users</li>
+    {% endfor %}
+  </ul>
+  <form action="{{ path('user_create') }}" method="POST" {{ form_enctype(userForm) }}>
+    {{ form_errors(userForm) }}
+
+    {{ form_errors(userForm.name) }}
+    {{ form_label(userForm.name) }}
+    {{ form_widget(userForm.name) }}
+
+    {{ form_errors(userForm.email) }}
+    {{ form_label(userForm.email) }}
+    {{ form_widget(userForm.email) }}
+
+    {{ form_rest(userForm) }}
+
+    <input type="submit" value="New user" />
+  </form>
+{% endblock %}

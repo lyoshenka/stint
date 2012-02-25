@@ -1,0 +1,12 @@
+<div class="breadcrumbs">
+  {% for name,url in path %}
+    {% if url %}
+      <a href="{{ url }}">{{ name }}</a>
+    {% else %}
+      {{ name }}
+    {% endif %}
+    {% if not loop.last %}
+    >
+    {% endif %}
+  {% endfor %}
+</div>

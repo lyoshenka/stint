@@ -1,5 +1,9 @@
 {% extends 'StintChoreBundle::layout.html.twig' %}
 
+{% block breadcrumbs %}
+  {% render "StintChoreBundle:Default:breadcrumbs" with {'object': chore} %}
+{% endblock %}
+
 {% form_theme form 'form_table_layout.html.twig' %}
 
 {% block content %}

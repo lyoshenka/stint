@@ -1,18 +1,18 @@
 {% extends 'StintChoreBundle::layout.html.twig' %}
 
 {% block breadcrumbs %}
-  {% render "StintChoreBundle:Default:breadcrumbs" with {'object': choreList} %}
+  {% render "StintChoreBundle:Default:breadcrumbs" with {'object': user} %}
 {% endblock %}
 
 {% block content %}
-  <h1>{{ choreList.name }}</h1>
+  <h1>{{ user.name }}</h1>
+  <h2>Chores</h2>
   <ul>
-    {% for chore in choreList.chores %}
+    {% for chore in user.chores %}
       <li>{% include 'StintChoreBundle:Chore:description.html.twig' %}</li>
     {% else %}
       <li>No chores</li>
     {% endfor %}
   </ul>
-  <a href="{{ path('chore_new', { 'listId': choreList.id }) }}">Add chore</a><br/>
   <a href="{{ path('home') }}">Home</a>
 {% endblock %}
